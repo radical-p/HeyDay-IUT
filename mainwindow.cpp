@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QtWidgets>
 #include <iostream>
-#include <fstream>
+#include <QFile>
 #include <string>
 using namespace std;
 
@@ -18,11 +18,11 @@ int shenaseP;
 int maxExp;
 }p;
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget *parent, int _id)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    //userId = _id;
+    userId = _id;
 
     ui->setupUi(this);
     this->setWindowTitle("HeyDay");
@@ -57,13 +57,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton_3->setIconSize(QSize(61, 62));
 
     //seting data
-    ifstream infile;
-    infile.open("person.txt",ios::in);
-    if(infile.good()){
-        infile.seekg(0, ios::end);
-        int size = infile.tellg();
-        infile.seekg(0, ios_base::beg);
-        while(infile.tellg()<size){
+    QFile infile("person.txt");
+    infile.open(QIODevice::ReadOnly);
+    if(infile.isOpen()){
+        infile.seek(ios::end);
+        int size = infile.size();
+        infile.seek(ios_base::beg);
+        while(infile.pos()<size){
                infile.read((char*)&p,sizeof(p));
                if(p.shenaseP == userId){
                    setLevel(p.level);
