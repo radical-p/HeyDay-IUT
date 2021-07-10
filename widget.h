@@ -2,9 +2,9 @@
 #define WIDGET_H
 #include "dialogformakeaccount.h"
 #include <QWidget>
-#include <fstream>
-#include <iostream>
-#include "mainwindow.h"
+
+
+#include  <mainwindow.h>
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
@@ -25,6 +25,6 @@ private slots:
 private:
     Ui::Widget *ui;
      DialogFormakeAccount* D;
-    MainWindow* w;
+     MainWindow * m;
 };
 #endif // WIDGET_H
