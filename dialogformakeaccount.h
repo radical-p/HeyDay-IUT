@@ -4,7 +4,7 @@
 using namespace std;
 #include <QDialog>
 #include <QMessageBox>
-#include <fstream>
+#include <QFile>
 namespace Ui {
 class DialogFormakeAccount;
 }
