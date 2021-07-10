@@ -1,14 +1,11 @@
 #include "widget.h"
-#include "mainwindow.h"
 #include "ui_widget.h"
-#include "global.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    w = new MainWindow;
 }
 
 Widget::~Widget()
@@ -37,27 +34,33 @@ void Widget::on_pushButton_2_clicked()
     int level;
     int shenaseP;
     int maxExp;
-    }pers;
+    }p;
     bool peyda=1;
-    ifstream infile;
-    infile.open("person.txt",ios::in);
-    if(infile.good()){
-        infile.seekg(0, ios::end);
-        int size = infile.tellg();
-        infile.seekg(0, ios_base::beg);
-        while(infile.tellg()<size){
-               infile.read((char*)&pers,sizeof(pers));
-               if(1/*ui->userLine->text().toUtf8().constData()==pers.username&&ui->passlineEdit->text().toUtf8().constData()==pers.pass*/){
+    QFile infile("person.txt");
+    infile.open(QIODevice::ReadOnly);
+    if(infile.isOpen()){
+        infile.seek(ios_base::end);
+        int size = infile.size();
+        infile.seek(ios_base::beg);
+        while(infile.pos()<size){
+               infile.read((char*)&p,sizeof(p));
+               if(ui->userLine->text().toUtf8().constData()==p.username&&ui->passlineEdit->text().toUtf8().constData()==p.pass){
+
                    peyda=0;
-                   // pouya code
-                   w->show();
-                   w->activateWindow();
+                  m=new MainWindow(this,p.shenaseP);
+                  this->close();
+
+                  m->show();
+
+
                }
+
         }
 
     }
-    if(peyda != 0){
+    if(peyda){
         QMessageBox::information(this,"ERROR","acc not found !");
+        this->close();
     }
     infile.close();
 }
