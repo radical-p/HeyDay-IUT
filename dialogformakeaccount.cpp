@@ -29,16 +29,11 @@ void DialogFormakeAccount::on_makeaccPush_clicked()
 
 
 
-       // p.name=ui->LineEditName->text().toStdString();
-       // p.pass=ui->LineEditPass->text().toStdString();
-        p.name=ui->LineEditName->text().toUtf8().constData();
-        p.pass=ui->LineEditPass->text().toUtf8().constData();
-       // string repass=ui->LineEditPass_2->text().toStdString();
+        p.name=ui->LineEditName->text().toStdString();
+        p.pass=ui->LineEditPass->text().toStdString();
         string repass=ui->LineEditPass_2->text().toUtf8().constData();
-       // p.username=ui->LineEditUser->text().toStdString();
-       // p.email=ui->LineEditEmail->text().toStdString();
-         p.username=ui->LineEditUser->text().toUtf8().constData();
-         p.email=ui->LineEditEmail->text().toUtf8().constData();
+        p.username=ui->LineEditUser->text().toStdString();
+        p.email=ui->LineEditEmail->text().toStdString();
         p.coin=0;
         p.exp=0;
         p.level=1;
@@ -55,7 +50,7 @@ void DialogFormakeAccount::on_makeaccPush_clicked()
              fopen_s(&fp,"tedadC.txt", "r");
         }
 
-        fscanf(fp, "%d", &tedad);
+        fscanf_s(fp, "%d", &tedad);
         tedad++;
         p.shenaseP=tedad;
         fclose(fp);
@@ -78,14 +73,15 @@ void DialogFormakeAccount::on_makeaccPush_clicked()
              QMessageBox::information(this,"Error","password dont match :(",QMessageBox::Ok);
 
         }
+        if(valid){
         struct temp temp2;
-        ifstream infile;
-        infile.open("person.txt",ios::in);
-        if(infile.good()){
-            infile.seekg(0, ios::end);
-            int size = infile.tellg();
-            infile.seekg(0, ios_base::beg);
-            while(infile.tellg()<size){
+        QFile infile("person.txt");
+        infile.open(QIODevice::ReadOnly);
+        if(infile.isOpen()){
+            infile.seek(ios_base::end);
+            int size = infile.size();
+            infile.seek(ios_base::beg);
+            while(infile.pos()<size){
                    infile.read((char*)&temp2,sizeof(temp2));
                    if(ui->LineEditUser->text().toStdString()==temp2.username){
                        valid=0;
@@ -95,18 +91,23 @@ void DialogFormakeAccount::on_makeaccPush_clicked()
                    }
 
             }
-
+          infile.close();
         }
-        infile.close();
-        if(valid){
-            fstream outfile;
-            outfile.open("person.txt", ios::app);
+
+}
+if (valid){
+            QFile outfile("person.txt");
+            outfile.open(QIODevice::Append);
             outfile.write((char*)&p,sizeof(p));
             fopen_s(&fp,"tedadC.txt", "w");
             fprintf(fp, "%d", tedad);
             fclose(fp);
-            this->close();
+            outfile.close();
         }
+
+        this->close();
+
+
 
 }
 
