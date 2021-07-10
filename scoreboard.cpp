@@ -1,6 +1,6 @@
 #include "scoreboard.h"
 #include "ui_scoreboard.h"
-#include <fstream>
+#include <QFile>
 using namespace std;
 
 struct temp{
@@ -21,13 +21,13 @@ scoreboard::scoreboard(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ifstream infile;
-    infile.open("person.txt",ios::in);
-    if(infile.good()){
-        infile.seekg(0, ios::end);
-        int size = infile.tellg();
-        infile.seekg(0, ios_base::beg);
-        while(infile.tellg()<size){
+    QFile infile("person.txt");
+    infile.open(QIODevice::ReadOnly);
+    if(infile.isOpen()){
+        infile.seek(ios_base::end);
+        int size = infile.size();
+        infile.seek(ios_base::beg);
+        while(infile.pos()<size){
                infile.read((char*)&person,sizeof(person));
                QString qstr = QString::fromStdString(person.name);
                QString tmp = qstr +  "    " +QString::number(person.level);
