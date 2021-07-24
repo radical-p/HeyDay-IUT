@@ -4,7 +4,21 @@
 using namespace std;
 #include <QDialog>
 #include <QMessageBox>
-#include <fstream>
+#include <QFile>
+#include  <QDataStream>
+
+struct person{
+QString name;
+QString pass;
+QString username;
+QString email;
+int coin;
+int exp;
+int level;
+int shenaseP;
+int maxExp;
+int day;
+};
 namespace Ui {
 class DialogFormakeAccount;
 }
@@ -15,6 +29,7 @@ class DialogFormakeAccount : public QDialog
 
 public:
     explicit DialogFormakeAccount(QWidget *parent = nullptr);
+
     ~DialogFormakeAccount();
 
 private slots:
@@ -24,6 +39,7 @@ private slots:
 
 private:
     Ui::DialogFormakeAccount *ui;
+
 };
 
 #endif // DIALOGFORMAKEACCOUNT_H

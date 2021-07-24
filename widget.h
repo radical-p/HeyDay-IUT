@@ -2,9 +2,10 @@
 #define WIDGET_H
 #include "dialogformakeaccount.h"
 #include <QWidget>
-#include <fstream>
-#include <iostream>
-#include "mainwindow.h"
+#include <QDataStream>
+
+#include  <mainwindow.h>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
@@ -17,6 +18,7 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
+
 private slots:
     void on_pushButton_pressed();
 
@@ -25,6 +27,6 @@ private slots:
 private:
     Ui::Widget *ui;
      DialogFormakeAccount* D;
-    MainWindow* w;
+     MainWindow * m;
 };
 #endif // WIDGET_H

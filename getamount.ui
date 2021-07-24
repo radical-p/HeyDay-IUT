@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>getAmount</class>
+ <widget class="QDialog" name="getAmount">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>151</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="coin">
+     <property name="text">
+      <string>coin</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="tedad">
+     <property name="text">
+      <string>tedad</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="capacity">
+     <property name="text">
+      <string>capacity</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>how much</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="lineEdit"/>
+   </item>
+   <item>
+    <widget class="QPushButton" name="SELL">
+     <property name="text">
+      <string>SELL</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="BUY">
+     <property name="text">
+      <string>BUY</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
